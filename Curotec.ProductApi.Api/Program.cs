@@ -5,13 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var config = builder.Configuration;
 
-// 🔧 Add Application Services (DbContext, Repositories, Caching, etc.)
+// Add Application Services (DbContext, Repositories, Caching, etc.)
 services.AddApplicationServices(config);
 
-// 🔧 Add Controllers
+// Add Controllers
 services.AddControllers();
 
-// 🔧 Add Swagger Generation
+// Add Swagger Generation
 services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -30,15 +30,15 @@ services.AddSwaggerGen(options =>
     }
 });
 
-// 🔧 Add API Explorer for Swagger
+// Add API Explorer for Swagger
 services.AddEndpointsApiExplorer();
 
-// 🔧 Optional: Add FluentValidation, API Versioning, etc.
+// Optional: Add FluentValidation, API Versioning, etc.
 
-// 🚀 Build app
+// Build app
 var app = builder.Build();
 
-// 🧩 Configure middleware
+// Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
