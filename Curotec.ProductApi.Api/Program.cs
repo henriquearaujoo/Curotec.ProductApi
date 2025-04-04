@@ -1,5 +1,6 @@
 ﻿using Curotec.ProductApi.Api.Extensions;
 using Curotec.ProductApi.Api.Middlewares;
+using Curotec.ProductApi.Api.Options;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,9 @@ services.AddSwaggerGen(options =>
 
 // Add API Explorer for Swagger
 services.AddEndpointsApiExplorer();
+
+services.Configure<RequestLoggingOptions>(
+    builder.Configuration.GetSection("RequestLogging"));
 
 // Optional: Add FluentValidation, API Versioning, etc.
 
