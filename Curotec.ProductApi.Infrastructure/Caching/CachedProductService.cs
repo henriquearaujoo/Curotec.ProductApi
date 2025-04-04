@@ -6,16 +6,22 @@ using Microsoft.Extensions.Logging;
 
 namespace Curotec.ProductApi.Infrastructure.Caching;
 
-public class CachedProductService(
-    IRepository<Product> repository,
-    IMemoryCache cache,
-    ILogger<CachedProductService> logger) 
+public class CachedProductService
 {
-    private readonly IRepository<Product> _repository = repository;
-    private readonly IMemoryCache _cache = cache;
-    private readonly ILogger<CachedProductService> _logger = logger;
+    private readonly IRepository<Product> _repository;
+    private readonly IMemoryCache _cache;
+    private readonly ILogger<CachedProductService> _logger;
+    private readonly TimeSpan _defaultCacheDuration = TimeSpan.FromMinutes(5);
 
-    private readonly TimeSpan _defaultCacheDuration = TimeSpan.FromMinutes(5); // or inject via options
+    public CachedProductService(
+        IRepository<Product> repository,
+        IMemoryCache cache,
+        ILogger<CachedProductService> logger)
+    {
+        _repository = repository;
+        _cache = cache;
+        _logger = logger;
+    }
 
     public async Task<IReadOnlyList<Product>> GetCachedProductsAsync(ISpecification<Product> spec)
     {
@@ -42,7 +48,6 @@ public class CachedProductService(
 
     private static string GenerateCacheKey(ISpecification<Product> spec)
     {
-        // Simple cache key using criteria and pagination
         var criteriaPart = spec.Criteria?.ToString() ?? "all";
         var skip = spec.Skip ?? 0;
         var take = spec.Take ?? 0;

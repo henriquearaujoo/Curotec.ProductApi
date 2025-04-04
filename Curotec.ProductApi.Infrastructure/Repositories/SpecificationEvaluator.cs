@@ -9,12 +9,12 @@ public static class SpecificationEvaluator<T> where T : class
     {
         var query = inputQuery;
 
-        if (spec.Criteria is not null)
+        if (spec.Criteria != null)
             query = query.Where(spec.Criteria);
 
-        if (spec.OrderBy is not null)
+        if (spec.OrderBy != null)
             query = query.OrderBy(spec.OrderBy);
-        else if (spec.OrderByDescending is not null)
+        else if (spec.OrderByDescending != null)
             query = query.OrderByDescending(spec.OrderByDescending);
 
         if (spec.IsPagingEnabled && spec.Skip.HasValue && spec.Take.HasValue)

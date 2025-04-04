@@ -1,8 +1,8 @@
 ﻿using Curotec.ProductApi.Application.Interfaces;
 using Curotec.ProductApi.Infrastructure.Caching;
+using Curotec.ProductApi.Infrastructure.Data;
 using Curotec.ProductApi.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using static Curotec.ProductApi.Infrastructure.Data.AppDbContext_;
 
 namespace Curotec.ProductApi.Api.Extensions;
 

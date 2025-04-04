@@ -1,15 +1,23 @@
 ﻿using Curotec.ProductApi.Application.Interfaces;
 using Curotec.ProductApi.Domain.Specifications;
+using Curotec.ProductApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using static Curotec.ProductApi.Infrastructure.Data.AppDbContext_;
 
 namespace Curotec.ProductApi.Infrastructure.Repositories;
 
-public class Repository<T>(AppDbContext context) : IRepository<T> where T : class
+public class Repository<T> : IRepository<T> where T : class
 {
-    private readonly AppDbContext _context = context;
+    private readonly AppDbContext _context;
 
-    public async Task<T?> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
+    public Repository(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<T?> GetByIdAsync(int id)
+    {
+        return await _context.Set<T>().FindAsync(id);
+    }
 
     public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
     {
