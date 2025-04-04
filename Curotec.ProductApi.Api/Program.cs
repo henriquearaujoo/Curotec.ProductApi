@@ -1,6 +1,9 @@
 ﻿using Curotec.ProductApi.Api.Extensions;
 using Curotec.ProductApi.Api.Middlewares;
 using Curotec.ProductApi.Api.Options;
+using Curotec.ProductApi.Application.Validators;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +40,9 @@ services.AddEndpointsApiExplorer();
 
 services.Configure<RequestLoggingOptions>(
     builder.Configuration.GetSection("RequestLogging"));
+
+services.AddFluentValidationAutoValidation();
+services.AddValidatorsFromAssemblyContaining<ProductCreateDtoValidator>();
 
 // Optional: Add FluentValidation, API Versioning, etc.
 
