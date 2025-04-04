@@ -1,4 +1,5 @@
 ﻿using Curotec.ProductApi.Api.Extensions;
+using Curotec.ProductApi.Api.Middlewares;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
