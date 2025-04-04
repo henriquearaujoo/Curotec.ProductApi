@@ -89,7 +89,7 @@ app.UseResponseCompression();
 app.UseCorrelationId();            
 app.UseExceptionHandling(); 
 app.UseRequestLogging();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 

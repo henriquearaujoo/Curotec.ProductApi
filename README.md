@@ -47,13 +47,14 @@ A clean, modular ASP.NET Core 7 Web API demonstrating advanced backend architect
 
 ---
 
-### 🐳 Run with Docker
+### 🐳 Run 
 
 ```bash
 docker-compose up -d sqlserver 
+dotnet run --project Curotec.ProductApi.Api
 ```
 
-- Product API: [https://localhost:7102](https://localhost:7102)
+- Product API: [http://localhost:5208](http://localhost:5208)
 - SQL Server: `localhost,1433` (`sa` / `Your_strong_password123`)
 
 ---
@@ -68,7 +69,7 @@ dotnet test Curotec.ProductApi.Tests
 
 ## 🔗 API Endpoints
 
-> Base URL: `https://localhost:7102/api/products`
+> Base URL: `http://localhost:5208/api/products`
 
 | Method | Endpoint               | Description             |
 |--------|------------------------|-------------------------|
@@ -110,7 +111,7 @@ dotnet test Curotec.ProductApi.Tests
 ## 🧪 Example Requests
 
 ```bash
-curl "https://localhost:7102/api/products?search=phone&pageIndex=1&pageSize=5&sort=priceDesc"
+curl "http://localhost:5208/api/products?search=phone&pageIndex=1&pageSize=5&sort=priceDesc"
 ```
 
 ```http
