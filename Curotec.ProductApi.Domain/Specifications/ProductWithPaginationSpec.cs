@@ -11,18 +11,14 @@ public class ProductWithPaginationSpec : BaseSpecification<Product>
 
         ApplyPaging((pageIndex - 1) * pageSize, pageSize);
 
-        if (!string.IsNullOrEmpty(sort))
+        OrderBy = sort switch
         {
-            OrderBy = sort switch
-            {
-                "priceAsc" => p => p.Price,
-                "priceDesc" => p => p.Price,
-                _ => p => p.Name
-            };
-        }
-        else
-        {
-            OrderBy = p => p.Name;
-        }
+            "priceAsc" => p => p.Price,
+            "priceDesc" => null, 
+            _ => p => p.Name
+        };
+
+        if (sort == "priceDesc")
+            OrderByDescending = p => p.Price;
     }
 }
