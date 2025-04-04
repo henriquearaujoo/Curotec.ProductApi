@@ -55,7 +55,7 @@ dotnet run --project Curotec.ProductApi.Api
 ```
 
 - Product API: [http://localhost:5208](http://localhost:5208)
-- SQL Server: `localhost,1433` (`sa` / `Your_strong_password123`)
+- SQL Server: `localhost,1433` (`sa` / `123456s!`)
 
 ---
 
@@ -98,7 +98,7 @@ dotnet test Curotec.ProductApi.Tests
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=sqlserver;Database=ProductApiDb;User=sa;Password=Your_strong_password123;TrustServerCertificate=True"
+    "DefaultConnection": "Server=localhost,1433;Database=ProductApiDb;User=sa;Password=123456s!;TrustServerCertificate=True"
   },
   "RequestLogging": {
     "Enabled": true
