@@ -26,8 +26,4 @@
     <ProjectReference Include="..\Curotec.ProductApi.Domain\Curotec.ProductApi.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UnitTests\" />
-  </ItemGroup>
-
 </Project>
