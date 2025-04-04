@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
         services.AddMemoryCache();
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped<CachedProductService>();
+        services.AddScoped<ICachedProductService, CachedProductService>();
 
         return services;
     }

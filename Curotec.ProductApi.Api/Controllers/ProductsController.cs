@@ -12,9 +12,9 @@ namespace Curotec.ProductApi.Api.Controllers;
 public class ProductsController : ControllerBase
 {
     private readonly IRepository<Product> _repository;
-    private readonly CachedProductService _cachedService;
+    private readonly ICachedProductService _cachedService;
 
-    public ProductsController(IRepository<Product> repository, CachedProductService cachedService)
+    public ProductsController(IRepository<Product> repository, ICachedProductService cachedService)
     {
         _repository = repository;
         _cachedService = cachedService;

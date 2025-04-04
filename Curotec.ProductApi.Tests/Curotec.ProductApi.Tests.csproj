@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Curotec.ProductApi.Api\Curotec.ProductApi.Api.csproj" />
     <ProjectReference Include="..\Curotec.ProductApi.Application\Curotec.ProductApi.Application.csproj" />
     <ProjectReference Include="..\Curotec.ProductApi.Infrastructure\Curotec.ProductApi.Infrastructure.csproj" />
     <ProjectReference Include="..\Curotec.ProductApi.Domain\Curotec.ProductApi.Domain.csproj" />

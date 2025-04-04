@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Curotec.ProductApi.Infrastructure.Caching;
 
-public class CachedProductService
+public class CachedProductService : ICachedProductService
 {
     private readonly IRepository<Product> _repository;
     private readonly IMemoryCache _cache;
