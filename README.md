@@ -51,6 +51,7 @@ A clean, modular ASP.NET Core 7 Web API demonstrating advanced backend architect
 
 ```bash
 docker-compose up -d sqlserver 
+dotnet ef database update --project Curotec.ProductApi.Infrastructure --startup-project Curotec.ProductApi.Api
 dotnet run --project Curotec.ProductApi.Api
 ```
 
