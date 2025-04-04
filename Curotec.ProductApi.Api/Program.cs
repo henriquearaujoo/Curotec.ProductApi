@@ -5,6 +5,7 @@ using Curotec.ProductApi.Application.Validators;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -35,6 +36,31 @@ services.AddSwaggerGen(options =>
     }
 });
 
+services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true; // 🔒 compress even if using HTTPS
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
+    {
+        "application/json",
+        "text/plain",
+        "application/javascript",
+        "text/css"
+    });
+});
+
+services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = System.IO.Compression.CompressionLevel.Fastest;
+});
+
+services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = System.IO.Compression.CompressionLevel.Fastest;
+});
+
 // Add API Explorer for Swagger
 services.AddEndpointsApiExplorer();
 
@@ -44,7 +70,6 @@ services.Configure<RequestLoggingOptions>(
 services.AddFluentValidationAutoValidation();
 services.AddValidatorsFromAssemblyContaining<ProductCreateDtoValidator>();
 
-// Optional: Add FluentValidation, API Versioning, etc.
 
 // Build app
 var app = builder.Build();
@@ -56,10 +81,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Product API v1");
-        options.RoutePrefix = "swagger"; // Show Swagger at root
+        options.RoutePrefix = "swagger"; 
     });
 }
 
+app.UseResponseCompression(); 
+app.UseCorrelationId();            
+app.UseExceptionHandling(); 
 app.UseRequestLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();
