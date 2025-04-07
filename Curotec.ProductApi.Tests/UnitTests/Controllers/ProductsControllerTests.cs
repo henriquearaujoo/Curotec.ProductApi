@@ -95,4 +95,54 @@ public class ProductsControllerTests
         Assert.IsType<NoContentResult>(result);
         _repoMock.Verify(r => r.DeleteAsync(existing), Times.Once);
     }
+
+    [Fact]
+    public async Task GetById_ShouldReturnNotFound_WhenProductDoesNotExist()
+    {
+        // Arrange
+        _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((Product?)null);
+
+        // Act
+        var result = await _controller.GetById(123); // ID that doesn't exist
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task Update_ShouldReturnNotFound_WhenProductDoesNotExist()
+    {
+        // Arrange
+        var dto = new ProductUpdateDto
+        {
+            Name = "Updated",
+            Price = 49.99m
+        };
+
+        _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((Product?)null);
+
+        // Act
+        var result = await _controller.Update(999, dto);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
+    }
+
+    [Fact]
+    public async Task Delete_ShouldReturnNotFound_WhenProductDoesNotExist()
+    {
+        // Arrange
+        _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((Product?)null);
+
+        // Act
+        var result = await _controller.Delete(999);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
+    }
+
+
 }
